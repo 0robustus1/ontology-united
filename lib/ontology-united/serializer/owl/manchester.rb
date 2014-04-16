@@ -30,7 +30,7 @@ module OntologyUnited::Serializer
           if prefix
             print_name = prefix.apply(ontology_class)
           else
-            "<#{ontology_class.name}>"
+            print_name = "<#{ontology_class.name}>"
           end
           "#{'Class: ' if class_definition?(ontology_class)}#{print_name}"
         end
