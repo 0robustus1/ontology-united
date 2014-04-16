@@ -5,3 +5,4 @@ end
 
 require "ontology-united/dsl"
 require "ontology-united/serializer"
+require "ontology-united/convenience"
