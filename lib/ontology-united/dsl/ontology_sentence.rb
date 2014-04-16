@@ -9,9 +9,8 @@ module OntologyUnited
         @sentence = sentence
       end
 
-      def to_s
-        first_class, middle, second_class = sentence
-        "#{first_class} #{middle} #{second_class.to_s(part_of: self)}"
+      def to_s(serializer: OntologyUnited::Serializer::DEFAULT.new)
+        serializer.serialize_sentence(self)
       end
 
     end

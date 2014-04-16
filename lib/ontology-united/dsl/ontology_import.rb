@@ -11,8 +11,8 @@ module OntologyUnited
         @subject = arg
       end
 
-      def to_s
-        "Import: <#{iri || ontology.iri}>"
+      def to_s(serializer: OntologyUnited::Serializer::DEFAULT.new)
+        serializer.serialize_import(self)
       end
 
     end

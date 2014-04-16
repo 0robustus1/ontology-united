@@ -28,8 +28,8 @@ module OntologyUnited
         "#{prefix}:#{ontology_class.name}"
       end
 
-      def to_s
-        "Prefix: #{prefix}: <#{iri || ontology.iri}#>"
+      def to_s(serializer: OntologyUnited::Serializer::DEFAULT.new)
+        serializer.serialize_prefix(self)
       end
 
     end

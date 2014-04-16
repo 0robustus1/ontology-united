@@ -14,9 +14,8 @@ module OntologyUnited
         parent.sub_class_of(self, parent_ontology_class)
       end
 
-      def to_s(part_of: nil)
-        print_name = prefix ? prefix.apply(self) : "<#{name}>"
-        "#{'Class: ' unless part_of}#{print_name}"
+      def to_s(serializer: OntologyUnited::Serializer::DEFAULT.new, part_of: nil)
+        serializer.serialize_class(self, part_of)
       end
 
     end

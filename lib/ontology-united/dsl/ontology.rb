@@ -61,12 +61,8 @@ module OntologyUnited
         sentence
       end
 
-      def to_s
-        the_prefixes.to_a.join("\n") + "\n" +
-          "Ontology: <#{iri}>\n" +
-            the_imports.to_a.join("\n") + "\n" +
-              the_classes.to_a.join("\n") + "\n" +
-                the_sentences.to_a.join("\n") + "\n"
+      def to_s(serializer: OntologyUnited::Serializer::DEFAULT.new)
+        serializer.serialize_ontology(self)
       end
 
       def file
