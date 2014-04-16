@@ -44,7 +44,7 @@ module OntologyUnited
         the_import
       end
 
-      def prefix(prefix, iri)
+      def prefix(prefix, iri=self)
         the_prefix = OntologyPrefix.new(prefix, iri)
         the_prefixes << the_prefix
         the_prefix
