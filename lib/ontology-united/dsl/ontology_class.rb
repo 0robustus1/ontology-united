@@ -14,8 +14,8 @@ module OntologyUnited
         parent.sub_class_of(self, parent_ontology_class)
       end
 
-      def to_s(serializer: OntologyUnited::Serializer::DEFAULT.new, part_of: nil)
-        serializer.serialize_class(self, part_of)
+      def to_s(serializer: OntologyUnited::Serializer::DEFAULT.new)
+        serializer.serialize_class(self)
       end
 
     end

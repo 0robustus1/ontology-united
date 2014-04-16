@@ -3,35 +3,60 @@ module OntologyUnited::Serializer
     class Manchester < SerializerBase
 
       def serialize_ontology(ontology)
-        ontology.the_prefixes.to_a.join("\n") + "\n" +
-          "Ontology: <#{ontology.iri}>\n" +
-            ontology.the_imports.to_a.join("\n") + "\n" +
-              ontology.the_classes.to_a.join("\n") + "\n" +
-                ontology.the_sentences.to_a.join("\n") + "\n"
+        to_s = Proc.new { |obj| obj.to_s(serializer: self) }
+        process ontology do
+          str = ''
+          str << join(ontology.the_prefixes, "\n", &to_s)
+          str << "\n" unless ontology.the_prefixes.empty?
+          str << "Ontology: <#{ontology.iri}>\n"
+          str << join(ontology.the_imports, "\n", &to_s)
+          str << "\n" unless ontology.the_imports.empty?
+          str << join(ontology.the_classes, "\n", &to_s)
+          str << "\n" unless ontology.the_classes.empty?
+          str << join(ontology.the_sentences, "\n", &to_s)
+        end
       end
 
       def serialize_prefix(ontology_prefix)
-        "Prefix: #{ontology_prefix.prefix}: " +
-          "<#{ontology_prefix.iri || ontology_prefix.ontology.iri}#>"
+        process ontology_prefix do
+          "Prefix: #{ontology_prefix.prefix}: " <<
+            "<#{ontology_prefix.iri || ontology_prefix.ontology.iri}#>"
+        end
       end
 
       def serialize_import(ontology_import)
-        "Import: <#{ontology_import.iri || ontology_import.ontology.iri}>"
+        process ontology_import do
+          "Import: <#{ontology_import.iri || ontology_import.ontology.iri}>"
+        end
       end
 
-      def serialize_class(ontology_class, part_of)
-        prefix = ontology_class.prefix
-        if prefix
-          print_name = prefix.apply(ontology_class)
-        else
-          "<#{ontology_class.name}>"
+      def serialize_class(ontology_class)
+        process ontology_class do
+          prefix = ontology_class.prefix
+          if prefix
+            print_name = prefix.apply(ontology_class)
+          else
+            "<#{ontology_class.name}>"
+          end
+          "#{'Class: ' if class_definition?(ontology_class)}#{print_name}"
         end
-        "#{'Class: ' unless part_of}#{print_name}"
       end
 
       def serialize_sentence(ontology_sentence)
-        first_class, middle, second_class = ontology_sentence.sentence
-        "#{first_class} #{middle} #{second_class.to_s(part_of: ontology_sentence)}"
+        opts = {serializer: self}
+        process ontology_sentence do
+          first_class, middle, second_class = ontology_sentence.sentence
+          "#{first_class.to_s(opts)} #{middle} #{second_class.to_s(opts)}"
+        end
+      end
+
+      def class_definition?(ontology_class)
+        # if no parent is set
+        parent_current.nil? ||
+          # or the parent is an ontology itself
+          ontology?(parent_current) ||
+          # or it is the first symbol of a sentence
+          sentence?(parent_current) && parent_current.sentence.first == ontology_class
       end
 
     end
