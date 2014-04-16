@@ -13,6 +13,10 @@ module OntologyUnited
         @name = name
       end
 
+      def elements
+        the_prefixes + the_imports + the_classes + the_sentences
+      end
+
       def iri
         create_tempfile if @iri.nil?
         @iri

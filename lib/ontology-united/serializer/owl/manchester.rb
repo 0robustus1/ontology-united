@@ -3,17 +3,11 @@ module OntologyUnited::Serializer
     class Manchester < SerializerBase
 
       def serialize_ontology(ontology)
-        to_s = Proc.new { |obj| obj.to_s(serializer: self) }
         process ontology do
-          str = ''
-          str << join(ontology.the_prefixes, "\n", &to_s)
-          str << "\n" unless ontology.the_prefixes.empty?
-          str << "Ontology: <#{ontology.iri}>\n"
-          str << join(ontology.the_imports, "\n", &to_s)
-          str << "\n" unless ontology.the_imports.empty?
-          str << join(ontology.the_classes, "\n", &to_s)
-          str << "\n" unless ontology.the_classes.empty?
-          str << join(ontology.the_sentences, "\n", &to_s)
+          str = "Ontology: <#{ontology.iri}>\n"
+          str << join(ontology.elements, "\n") do |element|
+            element.to_s(serializer: self)
+          end
         end
       end
 
