@@ -39,10 +39,14 @@ module OntologyUnited
         OntologyDSL.define(*args, &block)
       end
 
+      def redefine(ontology = self, &block)
+        OntologyDSL.redefine(ontology, &block)
+      end
+
       def imports(arg, &block)
         if block && arg.is_a?(Ontology)
           ontology = arg
-          arg = define(ontology.name, &block)
+          arg = redefine(&block)
         end
         the_import = OntologyImport.new(arg)
         the_imports << the_import

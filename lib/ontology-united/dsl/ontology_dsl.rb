@@ -4,6 +4,10 @@ module OntologyUnited
 
       def self.define(name, &block)
         ontology = Ontology.new(name)
+        redefine(ontology, &block)
+      end
+
+      def self.redefine(ontology, &block)
         stack.push(ontology)
         if block
           if block.arity == 1
