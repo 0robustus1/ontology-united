@@ -40,7 +40,7 @@ module OntologyUnited
       end
 
       def imports(arg, &block)
-        if block || arg.is_a?(Ontology)
+        if block && arg.is_a?(Ontology)
           ontology = arg
           arg = define(ontology.name, &block)
         end
