@@ -1,4 +1,5 @@
 require 'tempfile'
+require 'set'
 
 module OntologyUnited
   module DSL
