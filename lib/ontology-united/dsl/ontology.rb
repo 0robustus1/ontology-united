@@ -75,14 +75,17 @@ module OntologyUnited
       end
 
       def file
-        @file ||= create_tempfile
+        create_tempfile if @file.nil?
+        @file
       end
 
       def create_tempfile
         filename = name.match(%r(([^/]+)\.\w+$))[1]
         file = Tempfile.new([filename, '.owl'])
         @iri = "file://#{file.path}"
+        @file = file
         file.write(self.to_s)
+        file.flush
         file.rewind
         file
       end
