@@ -9,9 +9,9 @@ describe OntologyUnited do
 
   context 'when issueing a standard definition' do
     let(:ontology) do
-      OntologyUnited::DSL::OntologyDSL.define('Foo.owl') do
+      OntologyUnited::DSL::OntologyDSL.define('Foo') do
         rr = prefix('rr', self)
-        imports define('Bar.owl') do
+        imports define('Bar') do
           rr = prefix('rr', self)
           rr.class('SomeBar')
         end

@@ -5,7 +5,7 @@ describe OntologyUnited::Serializer::OWL::Manchester do
   let(:name) { 'OntologyName' }
   let(:list) do
     the_prefix, ontology_class, sentence = nil
-    o = OntologyUnited::DSL::OntologyDSL.define("#{name}.owl") do
+    o = OntologyUnited::DSL::OntologyDSL.define(name) do
       the_prefix = prefix('some', self)
       ontology_class = the_prefix.class('Foobar')
       sentence = ontology_class.sub_class_of the_prefix.class('NoBar')
@@ -62,8 +62,8 @@ describe OntologyUnited::Serializer::OWL::Manchester do
     let(:name) { 'OntologyName' }
     let(:list) do
       referenced, the_import = nil
-      o = OntologyUnited::DSL::OntologyDSL.define("#{name}.owl") do
-        referenced = define('OtherOne.owl') do
+      o = OntologyUnited::DSL::OntologyDSL.define(name) do
+        referenced = define('OtherOne') do
           ontohub = prefix('ontohub', self)
           ontohub.class('some_class')
         end

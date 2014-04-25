@@ -4,6 +4,7 @@ require 'set'
 module OntologyUnited
   module DSL
     class Ontology < BaseDSL
+      DEFAULT_EXTENSION = :owl
 
       attr_reader_with_default :the_classes, :the_imports,
         :the_sentences, :the_prefixes, default: Set
@@ -79,9 +80,13 @@ module OntologyUnited
         @file
       end
 
+      def extension
+        ".#{DEFAULT_EXTENSION}"
+      end
+
       def create_tempfile
-        filename = name.match(%r(([^/]+)\.\w+$))[1]
-        file = Tempfile.new([filename, '.owl'])
+        filename = name
+        file = Tempfile.new([filename, extension])
         @iri = "file://#{file.path}"
         @file = file
         file.write(self.to_s)
