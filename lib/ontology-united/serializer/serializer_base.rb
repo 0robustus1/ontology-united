@@ -38,7 +38,7 @@ module OntologyUnited
         subject.is_a?(OntologyUnited::DSL::OntologyClass)
       end
 
-      def class?(subject)
+      def sentence?(subject)
         subject.is_a?(OntologyUnited::DSL::OntologySentence)
       end
 
