@@ -53,7 +53,7 @@ describe OntologyUnited::Serializer::OWL::Manchester do
     let(:serialized) { sentence.to_s(serializer: manchester.new) }
 
     it 'should be a valid manchester syntax sentence definition' do
-      expect(serialized).to eq("Class: some:Foobar SubClassOf: Class: some:NoBar")
+      expect(serialized).to eq("Class: some:Foobar SubClassOf: some:NoBar")
     end
   end
 
