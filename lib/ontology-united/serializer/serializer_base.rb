@@ -3,8 +3,7 @@ module OntologyUnited
     class SerializerBase
 
       def initialize(current: nil)
-        self.current = current
-        self.parent_current = nil
+        stack.push(current) if current
       end
 
       def process(subject, &block)
