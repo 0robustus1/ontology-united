@@ -46,11 +46,11 @@ module OntologyUnited::Serializer
 
       def class_definition?(ontology_class)
         # if no parent is set
-        parent_current.nil? ||
+        parent.nil? ||
           # or the parent is an ontology itself
-          ontology?(parent_current) ||
+          ontology?(parent) ||
           # or it is the first symbol of a sentence
-          sentence?(parent_current) && parent_current.sentence.first == ontology_class
+          sentence?(parent) && parent.sentence.first == ontology_class
       end
 
     end

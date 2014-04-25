@@ -1,7 +1,6 @@
 module OntologyUnited
   module Serializer
     class SerializerBase
-      attr_accessor :current, :parent_current
 
       def initialize(current: nil)
         self.current = current
@@ -9,17 +8,30 @@ module OntologyUnited
       end
 
       def process(subject, &block)
-        previous_parent = mark!(subject)
+        mark!(subject)
         result = block.call
-        mark!(parent_current, previous_parent)
+        unmark!
         result
       end
 
-      def mark!(subject, parent=nil)
-        previous_parent = parent_current
-        parent_current = parent || current
-        current = subject
-        previous_parent
+      def mark!(subject)
+        stack.push(subject)
+      end
+
+      def unmark!
+        stack.pop
+      end
+
+      def stack
+        @stack ||= []
+      end
+
+      def current
+        stack[-1]
+      end
+
+      def parent
+        stack[-2]
       end
 
       def join(elements, sep)
