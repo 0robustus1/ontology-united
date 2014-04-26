@@ -47,11 +47,11 @@ OntologyUnited::DSL::OntologyDSL.define('MyOntologyName') do
 end
 ```
 
-or by including the convience module, which will give you a more
+or by including the convenience module, which will give you a more
 useful/shorter method call:
 ```ruby
 # you'll only need to do this once per namespace
-include OntologyUnited::Convience
+include OntologyUnited::Convenience
 
 define_ontology('MyOntologyName') do
 end
