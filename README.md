@@ -2,6 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/ontology-united.svg)](http://badge.fury.io/rb/ontology-united)
 [![Build Status](https://travis-ci.org/0robustus1/ontology-united.svg?branch=master)](https://travis-ci.org/0robustus1/ontology-united)
+[![Coverage Status](https://coveralls.io/repos/0robustus1/ontology-united/badge.png?branch=master)](https://coveralls.io/r/0robustus1/ontology-united?branch=master)
 
 ontology-united is a small DSL (domain specific language) for
 writing [OWL][owl] ontologies.
