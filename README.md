@@ -1,5 +1,6 @@
 # ontology-united
 
+[![Gem Version](https://badge.fury.io/rb/ontology-united.svg)](http://badge.fury.io/rb/ontology-united)
 [![Build Status](https://travis-ci.org/0robustus1/ontology-united.svg?branch=master)](https://travis-ci.org/0robustus1/ontology-united)
 
 ontology-united is a small DSL (domain specific language) for
