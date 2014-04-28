@@ -31,25 +31,6 @@ module OntologyUnited
         OntologyDSL.current
       end
 
-      def part_of(element)
-        @part_of ||= Set.new
-        @part_of << element
-      end
-
-      def part_of?(element)
-        @part_of ||= Set.new
-        @part_of.member?(element)
-      end
-
-      def called_for_parent_before?(method)
-        @the_calls ||= {}
-        !! the_calls[[parent, method]]
-      end
-
-      def eql?(object)
-        (self <=> object) == 0
-      end
-
     end
   end
 end

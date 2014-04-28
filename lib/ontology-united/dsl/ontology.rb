@@ -66,7 +66,6 @@ module OntologyUnited
           'SubClassOf:',
           parent_ontology_class
         ])
-        parent_ontology_class.part_of(sentence)
         the_sentences << sentence
         sentence
       end
