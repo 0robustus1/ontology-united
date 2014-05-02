@@ -9,6 +9,7 @@ module OntologyUnited
   end
 end
 
+require "ontology-united/dsl/variable_store.rb"
 require "ontology-united/dsl/base_dsl"
 require "ontology-united/dsl/ontology_entity_base"
 require "ontology-united/dsl/ontology"
