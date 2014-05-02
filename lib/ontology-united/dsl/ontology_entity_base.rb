@@ -1,6 +1,7 @@
 module OntologyUnited
   module DSL
     class OntologyEntityBase
+      include VariableStore::Helper
 
       attr_reader :the_calls
 

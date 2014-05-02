@@ -10,8 +10,10 @@ module OntologyUnited
         @name = name
       end
 
-      def sub_class_of(parent_ontology_class)
-        parent.sub_class_of(self, parent_ontology_class)
+      def sub_class_of(parent_ontology_class, as: nil)
+        sentence = parent.sub_class_of(self, parent_ontology_class)
+        sentence.as(as) if as
+        sentence
       end
 
       def to_s(serializer: OntologyUnited::Serializer::DEFAULT.new)

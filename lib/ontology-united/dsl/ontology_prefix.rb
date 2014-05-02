@@ -12,11 +12,11 @@ module OntologyUnited
         @subject = arg
       end
 
-      def class(name=nil)
+      def class(name=nil, as: nil)
         if name.nil?
           super()
         else
-          ontology_class = parent.class(name)
+          ontology_class = parent.class(name, as: as)
           ontology_class.prefix = self
           ontology_class
         end

@@ -4,6 +4,8 @@ require 'set'
 module OntologyUnited
   module DSL
     class Ontology < BaseDSL
+      include VariableStore::Declaration
+
       DEFAULT_EXTENSION = :owl
 
       attr_reader_with_default :the_classes, :the_imports,
@@ -24,11 +26,12 @@ module OntologyUnited
         @iri
       end
 
-      def class(name=nil)
+      def class(name=nil, as: nil)
         if name.nil?
           super()
         else
           ontology_class = OntologyClass.new(name)
+          ontology_class.as(as) if as
           the_classes << ontology_class
           ontology_class
         end
@@ -54,8 +57,9 @@ module OntologyUnited
         the_import
       end
 
-      def prefix(prefix, iri=self)
+      def prefix(prefix, iri=self, as: nil)
         the_prefix = OntologyPrefix.new(prefix, iri)
+        the_prefix.as(as) if as
         the_prefixes << the_prefix
         the_prefix
       end
