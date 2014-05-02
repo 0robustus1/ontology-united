@@ -25,7 +25,11 @@ describe OntologyUnited::DSL::VariableStore do
     let(:parent) { declaration_klass.new }
     let(:variable_instance) { variable_klass.new(parent, 'SomeString') }
 
-    context 'and a variable_assignment' do
+    it 'should respond with self to a variable assignment call' do
+      expect(variable_instance.as(:inner)).to eq(variable_instance)
+    end
+
+    context 'and a variable assignment' do
       before do
         variable_instance.as(:inner)
       end

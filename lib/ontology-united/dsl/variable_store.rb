@@ -5,6 +5,7 @@ module OntologyUnited
       module Helper
         def as(name)
           parent.declare(self, as: name.to_sym)
+          self
         end
       end
 
