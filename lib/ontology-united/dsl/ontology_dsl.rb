@@ -2,12 +2,13 @@ module OntologyUnited
   module DSL
     class OntologyDSL < BaseDSL
 
-      def self.define(name, &block)
+      def self.define(name, as: nil, &block)
         ontology = Ontology.new(name)
-        redefine(ontology, &block)
+        redefine(ontology, as: as, &block)
       end
 
-      def self.redefine(ontology, &block)
+      def self.redefine(ontology, as: nil, &block)
+        current.declare(ontology, as: as) if current && as
         stack.push(ontology)
         if block
           if block.arity == 1
