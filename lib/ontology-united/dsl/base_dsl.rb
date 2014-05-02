@@ -3,10 +3,10 @@ module OntologyUnited
     class BaseDSL
 
       class << self
+        include Stack
 
         attr_writer :stack
         attr_reader :the_attr_readers
-        attr_reader :current
 
         def attr_reader_with_default(*readers, default: nil)
           raise ArgumentError, 'Default value for reader needed' if default.nil?
@@ -14,14 +14,6 @@ module OntologyUnited
           @the_attr_readers ||= {}
           klass = default.is_a?(Class) ? default : default.class
           readers.each { |reader| @the_attr_readers[reader] = klass }
-        end
-
-        def stack
-          @stack ||= []
-        end
-
-        def current
-          self.stack.last
         end
 
       end

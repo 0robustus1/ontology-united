@@ -1,6 +1,7 @@
 module OntologyUnited
   module Serializer
     class SerializerBase
+      include Stack
 
       def initialize(current: nil)
         stack.push(current) if current
@@ -19,18 +20,6 @@ module OntologyUnited
 
       def unmark!
         stack.pop
-      end
-
-      def stack
-        @stack ||= []
-      end
-
-      def current
-        stack[-1]
-      end
-
-      def parent
-        stack[-2]
       end
 
       def join(elements, sep)
