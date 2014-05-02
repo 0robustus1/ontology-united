@@ -4,6 +4,8 @@ require 'set'
 module OntologyUnited
   module DSL
     class Ontology < BaseDSL
+      include VariableStore::Declaration
+
       DEFAULT_EXTENSION = :owl
 
       attr_reader_with_default :the_classes, :the_imports,

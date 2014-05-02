@@ -15,7 +15,7 @@ describe OntologyUnited do
           rr = prefix('rr', self)
           rr.class('SomeBar')
         end
-        rr.class('Bar').sub_class_of rr.class('Foo')
+        rr.class('Bar').sub_class_of rr.class('Foo').as(:foo_class)
         rr.class('something')
         rr.class('something').sub_class_of rr.class('Foo')
       end
@@ -27,6 +27,11 @@ describe OntologyUnited do
 
     it 'should have a valid iri' do
       expect(ontology.iri).to match(URI.regexp)
+    end
+
+    it 'should have an on-ontology variable of the right type defined' do
+      expect(ontology.foo_class).
+        to be_instance_of(OntologyUnited::DSL::OntologyClass)
     end
   end
 
