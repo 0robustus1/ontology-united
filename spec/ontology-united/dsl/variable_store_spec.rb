@@ -9,8 +9,14 @@ describe OntologyUnited::DSL::VariableStore do
   end
 
   let(:variable_klass) do
-    class VariableKlass < Struct.new(:parent, :some_string)
+    class VariableKlass
       include OntologyUnited::DSL::VariableStore::Helper
+      attr_accessor :parent, :some_string
+
+      def initialize(parent, some_string)
+        self.parent = parent
+        self.some_string = some_string
+      end
     end
     VariableKlass
   end
