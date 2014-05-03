@@ -3,8 +3,11 @@ require 'set'
 
 module OntologyUnited
   module DSL
-    class Ontology < BaseDSL
+    class Ontology < OntologyDSL
       include VariableStore::Declaration
+      include VariableStore::Helper
+
+      delegate_stack_to { |ontology| ontology.class.superclass }
 
       DEFAULT_EXTENSION = :owl
 

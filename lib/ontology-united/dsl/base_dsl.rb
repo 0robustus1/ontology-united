@@ -1,6 +1,7 @@
 module OntologyUnited
   module DSL
     class BaseDSL
+      extend Stack::Delegate
 
       class << self
         include Stack
@@ -24,13 +25,7 @@ module OntologyUnited
         end
       end
 
-      def stack
-        self.class.stack
-      end
-
-      def current
-        self.class.current
-      end
+      delegate_stack_to { |base_dsl| base_dsl.class }
 
     end
   end

@@ -8,8 +8,8 @@ module OntologyUnited
       end
 
       def self.redefine(ontology, as: nil, &block)
-        current.declare(ontology, as: as) if current && as
         stack.push(ontology)
+        ontology.as(as) if as
         if block
           if block.arity == 1
             block.call(ontology)
