@@ -1,9 +1,12 @@
 module OntologyUnited
   module DSL
     module VariableStore
+      class Error < ::StandardError; end
+      class ParentIsNilError < Error; end
 
       module Helper
         def as(name)
+          fail ParentIsNilError, 'Can\'t define variable on nil' unless parent
           parent.declare(self, as: name.to_sym)
           self
         end
