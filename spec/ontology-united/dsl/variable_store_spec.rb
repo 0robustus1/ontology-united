@@ -41,4 +41,13 @@ describe OntologyUnited::DSL::VariableStore do
     end
   end
 
+  context 'assuming an object without parent' do
+    let(:variable_instance) { variable_klass.new(nil, 'SomeString') }
+
+    it 'should raise the correct error' do
+      expect { variable_instance.as(:inner) }.to raise_error(OntologyUnited::DSL::VariableStore::ParentIsNilError)
+    end
+
+  end
+
 end
