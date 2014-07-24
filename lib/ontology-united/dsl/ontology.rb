@@ -53,7 +53,7 @@ module OntologyUnited
       def imports(arg, &block)
         if block && arg.is_a?(Ontology)
           ontology = arg
-          arg = redefine(&block)
+          arg = redefine(ontology, &block)
         end
         the_import = OntologyImport.new(arg)
         the_imports << the_import
