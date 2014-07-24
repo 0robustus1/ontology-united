@@ -2,9 +2,10 @@ module OntologyUnited
   module DSL
     class OntologyClass < OntologyEntityBase
 
+      delegate_equality_to method: :identifier
+
       attr_accessor :prefix
       attr_reader :name
-      delegate_equality_to method: :name
 
       def initialize(name)
         @name = name
@@ -18,6 +19,10 @@ module OntologyUnited
 
       def to_s(serializer: OntologyUnited::Serializer::DEFAULT.new)
         serializer.serialize_class(self)
+      end
+
+      def identifier
+        prefix ? prefix.identifier + [name] : [name]
       end
 
     end
