@@ -12,7 +12,7 @@ module OntologyUnited
       DEFAULT_EXTENSION = :owl
 
       attr_reader_with_default :the_classes, :the_imports,
-        :the_sentences, :the_prefixes, default: Set
+        :the_sentences, :the_prefixes, default: PseudoSet
       attr_reader :name
 
       def initialize(name)
@@ -33,9 +33,9 @@ module OntologyUnited
         if name.nil?
           super()
         else
-          ontology_class = OntologyClass.new(name)
+          sample = OntologyClass.new(name)
+          ontology_class = the_classes.add_or_fetch(sample)
           ontology_class.as(as) if as
-          the_classes << ontology_class
           ontology_class
         end
       end
