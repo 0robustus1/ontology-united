@@ -8,6 +8,8 @@ module OntologyUnited
       def self.delegate_equality_to(method: nil, variable: nil)
         define_method :== do |obj|
           if method
+            return false unless self.respond_to?(method.to_sym)
+            return false unless obj.respond_to?(method.to_sym)
             self.send(method.to_sym) == obj.send(method.to_sym)
           elsif variable
             own = self.instance_variable_get(:"@#{variable}")

@@ -3,7 +3,7 @@ module OntologyUnited
     class OntologyPrefix < OntologyEntityBase
 
       attr_reader :prefix, :iri, :ontology, :subject
-      delegate_equality_to method: :prefix
+      delegate_equality_to method: :identifier
 
       def initialize(prefix, arg)
         @prefix = prefix
@@ -30,6 +30,10 @@ module OntologyUnited
 
       def to_s(serializer: OntologyUnited::Serializer::DEFAULT.new)
         serializer.serialize_prefix(self)
+      end
+
+      def identifier
+        [@iri || @ontology.name, prefix]
       end
 
     end
