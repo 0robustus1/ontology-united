@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ontology-united (0.0.2)
+    ontology-united (0.0.3)
 
 GEM
   remote: https://rubygems.org/
